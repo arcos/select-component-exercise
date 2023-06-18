@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { SelectOption, Selector } from './Selector';
+import { breeds } from './breeds';
+
+export const fetchBreeds = async () => {
+  const data = await fetch('https://api.thedogapi.com/v1/breeds');
+  const breeds = await data.json();
+  return mapBreedsToSelectOptions(breeds);
+};
+
+const mapBreedsToSelectOptions = (breeds: any) =>
+  breeds.map((breed: any) => ({
+    label: breed.name,
+    value: breed.temperament
+  })) as SelectOption[];
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Selector
+        id="breed-selector"
+        placeholder="Velg hunderase"
+        selectorLabel="Hunderase"
+        fetchOptions={fetchBreeds}
+      />
+      <div style={{ marginTop: '100px' }}>
+        <p>Select with pre-assigned data</p>
+
+        <Selector
+          id="breed-selector-2"
+          placeholder="Velg hunderase"
+          selectorLabel="Hunderase"
+          prefetchedOptions={mapBreedsToSelectOptions(breeds)}
+        />
+      </div>
     </div>
   );
 }

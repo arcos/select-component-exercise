@@ -1,0 +1,72 @@
+{
+  "folders": [
+    {
+      "path": "./"
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 2,
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    ],
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "stylelint.enable": true,
+    "css.validate": false,
+    "scss.validate": false,
+    "[css]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": false
+      }
+    },
+    "[scss]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": false
+      }
+    },
+    "files.associations": {
+      "*.css": "scss"
+    },
+    "search.exclude": {
+      "**/*.next": true
+    },
+    "tailwindCSS.experimental.classRegex": [
+      ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ],
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Next.js: debug server-side",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run dev"
+      },
+      {
+        "name": "Next.js: debug client-side",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:3000"
+      },
+      {
+        "name": "Next.js: debug full stack",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run dev",
+        "console": "integratedTerminal",
+        "serverReadyAction": {
+          "pattern": "started server on .+, url: (https?://.+)",
+          "uriFormat": "%s",
+          "action": "debugWithChrome"
+        }
+      }
+    ]
+  }
+}
