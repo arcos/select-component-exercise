@@ -6,19 +6,22 @@ export type SelectOption = {
   value: string;
 };
 
-const subLabel = (subLabel: string) => ({
-  ':after': {
-    color: 'rgba(0,0,0,0.5)',
-    content: '"' + subLabel + '"',
-    fontFamily: 'Lato, sans-serif',
-    fontSize: '16px',
-    paddingTop: '4px',
-    display: 'block',
-    height: '20px',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
+const subLabel = (subLabel: string = '') => {
+  if (subLabel.length > 50) {
+    subLabel = subLabel.substring(0, 50) + '...';
   }
-});
+
+  return {
+    ':after': {
+      color: 'rgba(0,0,0,0.5)',
+      content: '"' + subLabel + '"',
+      fontFamily: 'Lato, sans-serif',
+      fontSize: '16px',
+      paddingTop: '4px',
+      display: 'block'
+    }
+  };
+};
 
 export const Selector = ({
   id,
